@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 DATABASE_URL = "sqlite:///./test.db"
 
 engine = create_engine(
-    SQLALchemyDatabaseURL,
+    DATABASE_URL,
     connect_args={"check_same_thread": False}
 )
 
