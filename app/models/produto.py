@@ -6,6 +6,5 @@ class Produto(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     nome = Column(String, index=True)
-    descricao = Column(String, index=True)
     preco = Column(Float, index=True)
     quantidade = Column(Integer, index=True)
