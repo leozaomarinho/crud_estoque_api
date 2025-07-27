@@ -33,4 +33,12 @@ def update_produto(db: Session, id: str, produto: ProdutoUpdate):
         db.commit()
         db.refresh(db_produto)
     return db_produto
+
+def delete_produto(db: Session, id: str):
+    db_produto = get_produto(db, id)
+    if db_produto:
+        db.delete(db_produto)
+        db.commit()
+    return db_produto
+    # deleta um produto específico pelo ID
     
