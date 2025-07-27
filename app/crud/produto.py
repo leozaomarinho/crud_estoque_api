@@ -23,3 +23,14 @@ def create_produto(db: Session, produto: ProdutoCreate):
     db.refresh(db_produto)
     return db_produto
     # cria um novo produto no banco de dados
+
+def update_produto(db: Session, id: str, produto: ProdutoUpdate):
+    db_produto = get_produto(db, id)
+    if db_produto:
+        db_produto.nome = produto.nome
+        db_produto.preco = produto.preco
+        db_produto.quantidade = produto.quantidade
+        db.commit()
+        db.refresh(db_produto)
+    return db_produto
+    
