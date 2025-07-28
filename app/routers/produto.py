@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.crud.produto import get_produtos, get_produto, create_produto, update_produto, delete_produto
 from app.schemas.produto import ProdutoCreate, ProdutoUpdate
+from fastapi import HTTPException
 
 
 
