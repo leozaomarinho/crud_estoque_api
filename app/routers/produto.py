@@ -40,3 +40,10 @@ def update_existing_produto(id: str, produto: ProdutoUpdate, db: Session = Depen
     if db_produto is None:
         raise HTTPException(status_code=404, detail="Produto not found")
     return db_produto
+
+@router.delete("/{id}", response_model=ProdutoUpdate)
+def delete_existing_produto(id: str, db: Session = Depends(get_db)):
+    db_produto = delete_produto(db, id)
+    if db_produto is None:
+        raise HTTPException(status_code=404, detail="Produto not found")
+    return db_produto
