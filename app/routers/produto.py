@@ -12,12 +12,17 @@ router = APIRouter(
     tags=["produto"]
 )
 
+
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
+
+@router.get("/home")
+def read_root():
+    return {"message": "Bem-vindo à API de Produtos"}
 
 @router.get("/", response_model=list)
 def read_produtos(db: Session = Depends(get_db)):
