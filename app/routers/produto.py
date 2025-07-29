@@ -33,3 +33,10 @@ def read_produto(id: str, db: Session = Depends(get_db)):
 @router.post("/", response_model=ProdutoUpdate)
 def create_new_produto(produto: ProdutoCreate, db: Session = Depends(get_db)):
     return create_produto(db, produto)
+
+@router.put("/{id}", response_model=ProdutoUpdate)
+def update_existing_produto(id: str, produto: ProdutoUpdate, db: Session = Depends(get_db)):
+    db_produto = update_produto(db, id, produto)
+    if db_produto is None:
+        raise HTTPException(status_code=404, detail="Produto not found")
+    return db_produto
