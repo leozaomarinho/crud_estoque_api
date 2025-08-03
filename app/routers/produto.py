@@ -8,8 +8,8 @@ from fastapi import HTTPException
 
 
 router = APIRouter(
-    prefix="/produto",
-    tags=["produto"]
+    prefix="/produtos",
+    tags=["produtos"]
 )
 
 
@@ -25,18 +25,18 @@ def read_root():
     return {"message": "Bem-vindo à API de Produtos"}
 
 @router.get("/", response_model=list)
-def read_produtos(db: Session = Depends(get_db)):
+def listar_produtos(db: Session = Depends(get_db)):
     return get_produtos(db)
 
 @router.get("/{id}", response_model=ProdutoUpdate)
-def read_produto(id: str, db: Session = Depends(get_db)):
-    produto = get_produto(db, id)
-    if produto is None:
+def obter_produto(id: str, db: Session = Depends(get_db)):
+    db_produto = get_produto(db, id)
+    if db_produto is None:
         raise HTTPException(status_code=404, detail="Produto not found")
-    return produto
+    return db_produto
 
 @router.post("/", response_model=ProdutoUpdate)
-def create_new_produto(produto: ProdutoCreate, db: Session = Depends(get_db)):
+def criar_produto(produto: ProdutoCreate, db: Session = Depends(get_db)):
     return create_produto(db, produto)
 
 @router.put("/{id}", response_model=ProdutoUpdate)
